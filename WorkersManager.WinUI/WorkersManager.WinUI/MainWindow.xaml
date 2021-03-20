@@ -47,16 +47,16 @@
             <TextBox Header="Имя" Margin="10"
                      Text="{x:Bind ViewModel.SelectedWorker.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBox  Grid.Row="1" Header="Фамилия" Margin="10"
-                       Text="{x:Bind ViewModel.SelectedWorker.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>/>
+                       Text="{x:Bind ViewModel.SelectedWorker.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <NumberBox Grid.Row="2" Header="Возраст" Margin="10"
-                        Text="{x:Bind ViewModel.SelectedWorker.Age, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>/>
+                       Text="{x:Bind ViewModel.SelectedWorker.Age, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <ComboBox Grid.Row="3" Header="Департамент" Margin="10" HorizontalAlignment="Stretch"
                       ItemsSource="{x:Bind ViewModel.Departments, Mode=OneWay}"
                       DisplayMemberPath="Title"
                       SelectedValuePath="Id"
                       SelectedValue="{x:Bind ViewModel.SelectedWorker.DepartmentId, Mode=TwoWay}"/>
             <NumberBox Grid.Row="4" Header="Зарплата" Margin="10"
-                        Text="{x:Bind ViewModel.SelectedWorker.Salary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>/>
+                        Text="{x:Bind ViewModel.SelectedWorker.Salary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Grid.Row="5" Content="Сохранить" Margin="10 10 10 30"
                     IsEnabled="{x:Bind ViewModel.SelectedWorker.CanSave, Mode=OneWay}"
                     Click="{x:Bind ViewModel.SelectedWorker.Save}"
