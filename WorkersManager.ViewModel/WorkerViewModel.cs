@@ -1,12 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using WorkersManager.Common.DataProvider;
 using WorkersManager.Common.Model;
 
 namespace WorkersManager.ViewModel
 {
-    public class WorkerViewModel : INotifyPropertyChanged
+    public class WorkerViewModel : ViewModelBase
     {
         private readonly Worker _worker;
         private readonly IWorkersDataProvider _workersDataProvider;
@@ -89,13 +88,6 @@ namespace WorkersManager.ViewModel
         public void Save()
         {
             _workersDataProvider.SaveWorker(_worker);
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
