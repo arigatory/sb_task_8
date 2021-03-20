@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using WorkersManager.Common.DataProvider;
+﻿using WorkersManager.Common.DataProvider;
 using WorkersManager.Common.Model;
 
 namespace WorkersManager.ViewModel
