@@ -25,12 +25,16 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Button Content="Обновить" Margin="10"/>
-            <ListView Grid.Row="1"/>
+            <Button Content="Обновить" Click="{x:Bind ViewModel.Load}" Margin="10"/>
+            <ListView Grid.Row="1"
+                      ItemsSource="{x:Bind ViewModel.Workers, Mode=OneWay}"
+                      SelectedItem="{x:Bind ViewModel.SelectedWorker, Mode=TwoWay}"
+                      DisplayMemberPath="LastName"/>
         </Grid>
         
         <!--MainArea-->
-        <Grid Grid.Row="1" Grid.Column="1">
+        <Grid Grid.Row="1" Grid.Column="1"
+              Visibility="{x:Bind ViewModel.IsWorkerSelected, Mode=OneWay}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -40,12 +44,22 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TextBox Header="Имя" Margin="10"/>
-            <TextBox  Grid.Row="1" Header="Фамилия" Margin="10"/>
-            <NumberBox Grid.Row="2" Header="Возраст" Margin="10"/>
-            <ComboBox Grid.Row="3" Header="Департамент" Margin="10" HorizontalAlignment="Stretch"/>
-            <NumberBox Grid.Row="4" Header="Зарплата" Margin="10"/>
+            <TextBox Header="Имя" Margin="10"
+                     Text="{x:Bind ViewModel.SelectedWorker.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox  Grid.Row="1" Header="Фамилия" Margin="10"
+                       Text="{x:Bind ViewModel.SelectedWorker.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>/>
+            <NumberBox Grid.Row="2" Header="Возраст" Margin="10"
+                        Text="{x:Bind ViewModel.SelectedWorker.Age, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>/>
+            <ComboBox Grid.Row="3" Header="Департамент" Margin="10" HorizontalAlignment="Stretch"
+                      ItemsSource="{x:Bind ViewModel.Departments, Mode=OneWay}"
+                      DisplayMemberPath="Title"
+                      SelectedValuePath="Id"
+                      SelectedValue="{x:Bind ViewModel.SelectedWorker.DepartmentId, Mode=TwoWay}"/>
+            <NumberBox Grid.Row="4" Header="Зарплата" Margin="10"
+                        Text="{x:Bind ViewModel.SelectedWorker.Salary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>/>
             <Button Grid.Row="5" Content="Сохранить" Margin="10 10 10 30"
+                    IsEnabled="{x:Bind ViewModel.SelectedWorker.CanSave, Mode=OneWay}"
+                    Click="{x:Bind ViewModel.SelectedWorker.Save}"
                     VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
         </Grid>
         
