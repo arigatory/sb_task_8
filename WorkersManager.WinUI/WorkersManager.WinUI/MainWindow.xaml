@@ -6,8 +6,56 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <!--Header-->
+        <Border Grid.ColumnSpan="2" Background="#FF375E95">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Image Source="/Images/workers-logo.png"  Height="90" Margin="10"/>
+                <TextBlock Text="Менеджер сотрудников" FontSize="40"
+                           VerticalAlignment="Center" Foreground="White"/>
+            </StackPanel>
+        </Border>
+        
+        
+        <!--Navigation-->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button Content="Обновить" Margin="10"/>
+            <ListView Grid.Row="1"/>
+        </Grid>
+        
+        <!--MainArea-->
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
-    </StackPanel>
+            <TextBox Header="Имя" Margin="10"/>
+            <TextBox  Grid.Row="1" Header="Фамилия" Margin="10"/>
+            <NumberBox Grid.Row="2" Header="Возраст" Margin="10"/>
+            <ComboBox Grid.Row="3" Header="Департамент" Margin="10" HorizontalAlignment="Stretch"/>
+            <NumberBox Grid.Row="4" Header="Зарплата" Margin="10"/>
+            <Button Grid.Row="5" Content="Сохранить" Margin="10 10 10 30"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+        </Grid>
+        
+        
+    </Grid>
 </Window>
