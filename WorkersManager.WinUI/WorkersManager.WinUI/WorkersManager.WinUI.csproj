@@ -9,6 +9,7 @@
     <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Controls\HeaderControl.xaml" />
     <None Remove="Images\workers-logo.png" />
   </ItemGroup>
   <ItemGroup>
@@ -18,5 +19,11 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.WinUI" Version="3.0.0-preview4.210210.4" />
     <Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Controls\HeaderControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>
