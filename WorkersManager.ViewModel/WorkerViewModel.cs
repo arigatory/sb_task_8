@@ -83,9 +83,6 @@ namespace WorkersManager.ViewModel
 
         public bool CanSave => !string.IsNullOrEmpty(FirstName);
 
-        public void Save()
-        {
-            _workersDataProvider.SaveWorker(_worker);
-        }
+        public Worker Worker => _worker;
     }
 }

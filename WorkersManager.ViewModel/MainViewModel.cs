@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using WorkersManager.Common.DataProvider;
 using WorkersManager.Common.Model;
 
@@ -12,6 +13,7 @@ namespace WorkersManager.ViewModel
         public MainViewModel(IWorkersDataProvider workerDataProvider)
         {
             _workerDataProvider = workerDataProvider;
+            Load();
         }
 
         public ObservableCollection<WorkerViewModel> Workers { get; } = new();
@@ -30,7 +32,9 @@ namespace WorkersManager.ViewModel
                 }
             }
         }
+
         public bool IsWorkerSelected => SelectedWorker != null;
+        public bool CanBeSorted => Workers.Count > 1;
 
         public void Load()
         {
@@ -48,6 +52,59 @@ namespace WorkersManager.ViewModel
             {
                 Departments.Add(department);
             }
+            RaisePropertyChanged(nameof(CanBeSorted));
+        }
+
+        public void Add()
+        {
+            var newWorker = new WorkerViewModel(new Worker { LastName = "Новый", FirstName = "работник", Age=20, DepartmentId=1, Id=5, Salary=55000 }, _workerDataProvider);
+            Workers.Add(newWorker);
+            SelectedWorker = newWorker;
+            RaisePropertyChanged(nameof(CanBeSorted));
+        }
+
+        public void Delete()
+        {
+            if (SelectedWorker!=null)
+            {
+                Workers.Remove(SelectedWorker);
+                RaisePropertyChanged(nameof(CanBeSorted));
+            }
+        }
+
+        public void SortWorkersByName()
+        {
+            var sortedWorkers = Workers.OrderBy(w => w.FirstName).ToList();
+            Workers.Clear();
+            foreach (var worker in sortedWorkers)
+            {
+                Workers.Add(worker);
+            }
+        }
+
+        public void SortWorkersByLastName()
+        {
+            var sortedWorkers = Workers.OrderBy(w => w.LastName).ToList();
+            Workers.Clear();
+            foreach (var worker in sortedWorkers)
+            {
+                Workers.Add(worker);
+            }
+        }
+
+        public void SortWorkersBySalary()
+        {
+            var sortedWorkers = Workers.OrderBy(w => w.Salary).ToList();
+            Workers.Clear();
+            foreach (var worker in sortedWorkers)
+            {
+                Workers.Add(worker);
+            }
+        }
+
+        public void Save()
+        {
+            _workerDataProvider.Save(Workers.Select(w=>w.Worker), Departments);
         }
     }
 }

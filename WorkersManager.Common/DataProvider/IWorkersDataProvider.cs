@@ -9,7 +9,7 @@ namespace WorkersManager.Common.DataProvider
     {
         IEnumerable<Worker> LoadWorkers();
 
-        void SaveWorker(Worker worker);
+        void Save(IEnumerable<Worker> workers, IEnumerable<Department> departments);
 
         IEnumerable<Department> LoadDepartments();
     }

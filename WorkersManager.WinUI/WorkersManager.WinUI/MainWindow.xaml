@@ -10,14 +10,16 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         
         <!--Header-->
-        <controls:HeaderControl Grid.ColumnSpan="2" />
+        <controls:HeaderControl Grid.ColumnSpan="3" />
  
         <!--Navigation-->
         <Grid Grid.Row="1">
@@ -25,15 +27,41 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Button Content="Обновить" Click="{x:Bind ViewModel.Load}" Margin="10"/>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Загрузить" Click="{x:Bind ViewModel.Load}" Margin="10"/>
+                <Button Content="Добавить" Click="{x:Bind ViewModel.Add}" Margin="10"/>
+                <Button Content="Удалить" Click="{x:Bind ViewModel.Delete}" Margin="10"/>
+            </StackPanel>
+            
             <ListView Grid.Row="1"
                       ItemsSource="{x:Bind ViewModel.Workers, Mode=OneWay}"
-                      SelectedItem="{x:Bind ViewModel.SelectedWorker, Mode=TwoWay}"
-                      DisplayMemberPath="LastName"/>
+                      SelectedItem="{x:Bind ViewModel.SelectedWorker, Mode=TwoWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding FirstName, Mode=OneWay}" FontWeight="Bold" Margin="0 0 5 0"/>
+                            <TextBlock Text="{Binding LastName, Mode=OneWay}" Margin="0 0 10 0"/>
+                            <TextBlock Text="Возраст:"/>
+                            <TextBlock Text="{Binding Age, Mode=OneWay}" Margin="0 0 10 0"/>
+                            <TextBlock Text="Зарплата:"/>
+                            <TextBlock Text="{Binding Salary, Mode=OneWay}" Margin="0 0 5 0"/>
+                            <TextBlock Text="руб."/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
-        
+
+        <!--Sorting buttons-->
+        <StackPanel Grid.Row="1" Grid.Column="1" Visibility="{x:Bind ViewModel.CanBeSorted, Mode=OneWay}">
+            <TextBlock Text="Сортировать:"/>
+            <Button Content="По имени" Click="{x:Bind ViewModel.SortWorkersByName}" Margin="10" Width="100"/>
+            <Button Content="По фамилии" Click="{x:Bind ViewModel.SortWorkersByLastName}" Margin="10" Width="100"/>
+            <Button Content="По зарплате" Click="{x:Bind ViewModel.SortWorkersBySalary}" Margin="10" Width="100"/>
+        </StackPanel>
+
         <!--MainArea-->
-        <Grid Grid.Row="1" Grid.Column="1"
+        <Grid Grid.Row="1" Grid.Column="2"
               Visibility="{x:Bind ViewModel.IsWorkerSelected, Mode=OneWay}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -57,12 +85,13 @@
                       SelectedValue="{x:Bind ViewModel.SelectedWorker.DepartmentId, Mode=TwoWay}"/>
             <NumberBox Grid.Row="4" Header="Зарплата" Margin="10"
                         Text="{x:Bind ViewModel.SelectedWorker.Salary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            
+        </Grid>
+        <StackPanel Grid.Row="2">
             <Button Grid.Row="5" Content="Сохранить" Margin="10 10 10 30"
                     IsEnabled="{x:Bind ViewModel.SelectedWorker.CanSave, Mode=OneWay}"
-                    Click="{x:Bind ViewModel.SelectedWorker.Save}"
+                    Click="{x:Bind ViewModel.Save}"
                     VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-        </Grid>
-        
-        
+        </StackPanel>
     </Grid>
 </Window>
