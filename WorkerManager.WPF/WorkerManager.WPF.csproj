@@ -6,4 +6,19 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Images\workers-logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\workers-logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Controls\HeaderControl.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>
