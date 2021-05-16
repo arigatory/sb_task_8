@@ -54,7 +54,7 @@
         </Grid>
 
         <!--Sorting buttons-->
-        <StackPanel Grid.Row="1" Grid.Column="1" Visibility="{Binding CanBeSorted, Mode=OneWay}">
+        <StackPanel Grid.Row="1" Grid.Column="1" Visibility="{Binding CanBeSorted, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
             <TextBlock Text="Сортировать:"/>
             <Button Content="По имени" Margin="10" Width="100"/>
             <Button Content="По фамилии"  Margin="10" Width="100"/>
@@ -63,7 +63,7 @@
 
         <!--MainArea-->
         <Grid Grid.Row="1" Grid.Column="2"
-              Visibility="{Binding IsWorkerSelected, Mode=OneWay}">
+              Visibility="{Binding IsWorkerSelected, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
