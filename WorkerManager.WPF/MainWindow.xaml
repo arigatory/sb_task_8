@@ -29,7 +29,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal">
-                <Button Content="Загрузить" Margin="10"/>
+                <Button Content="Загрузить" Margin="10" Command="{Binding LoadCommand, Mode=OneWay}"/>
                 <Button Content="Добавить"  Margin="10"/>
                 <Button Content="Удалить" Margin="10"/>
             </StackPanel>
@@ -100,7 +100,7 @@
         </Grid>
         <StackPanel Grid.Row="2">
             <Button Grid.Row="5" Content="Сохранить" Margin="10 10 10 30"
-                    IsEnabled="{Binding SelectedWorker.CanSave, Mode=OneWay}"
+                    Command="{Binding SaveCommand, Mode=OneWay}"
                     VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
         </StackPanel>
     </Grid>

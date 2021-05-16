@@ -2,6 +2,7 @@
 using System.Linq;
 using WorkersManager.Common.DataProvider;
 using WorkersManager.Common.Model;
+using WorkersManager.ViewModel.Command;
 
 namespace WorkersManager.ViewModel
 {
@@ -14,7 +15,12 @@ namespace WorkersManager.ViewModel
         {
             _workerDataProvider = workerDataProvider;
             Load();
+            LoadCommand = new DelegateCommand(Load);
+            SaveCommand = new DelegateCommand(Save);
+
         }
+        public DelegateCommand LoadCommand { get; }
+        public DelegateCommand SaveCommand { get; }
 
         public ObservableCollection<WorkerViewModel> Workers { get; } = new();
         public ObservableCollection<Department> Departments { get; } = new();
@@ -35,6 +41,7 @@ namespace WorkersManager.ViewModel
 
         public bool IsWorkerSelected => SelectedWorker != null;
         public bool CanBeSorted => Workers.Count > 1;
+
 
         public void Load()
         {

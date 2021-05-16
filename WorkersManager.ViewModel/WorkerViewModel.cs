@@ -1,5 +1,6 @@
 ﻿using WorkersManager.Common.DataProvider;
 using WorkersManager.Common.Model;
+using WorkersManager.ViewModel.Command;
 
 namespace WorkersManager.ViewModel
 {
